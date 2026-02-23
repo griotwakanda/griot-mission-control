@@ -1,0 +1,3 @@
+[build]
+  publish = "mission-control"
+  command = ""
