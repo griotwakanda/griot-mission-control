@@ -63,6 +63,14 @@
     a{color:var(--accent);text-decoration:none}
     a:hover{text-decoration:underline}
 
+    .session-section{margin-top:26px;border:1px solid var(--border);border-radius:var(--radius);background:rgba(255,255,255,.04);padding:18px}
+    .session-section .sectionTitle{margin-bottom:12px}
+    .session-list{display:flex;flex-direction:column;gap:10px}
+    .session-entry{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid rgba(255,255,255,.06)}
+    .session-entry:first-child{border-top:none;margin-top:0}
+    .session-time{font-size:12px;color:var(--muted);min-width:70px}
+    .session-desc{font-size:13px;line-height:1.4;color:var(--text)}
+
     @media (max-width: 980px){
       .kpi{grid-column:span 3;}
       .col{grid-column:span 12;}
@@ -148,6 +156,16 @@
         </div>
       </div>
     </div>
+
+    <section class="session-section">
+      <div class="sectionTitle">
+        <h2>Session log</h2>
+        <span class="hint">Short notes for every finished task</span>
+      </div>
+      <div class="session-list" id="sessionList">
+        <p class="muted">Loading session log…</p>
+      </div>
+    </section>
 
     <div class="footer">
       Griot Mission Control — Powered by OpenClaw • Data source: workspace BOARD.md
@@ -245,9 +263,52 @@
       document.getElementById('qmdStatus').textContent = 'active (local)';
     }
 
+    function renderSessionLog(entries) {
+      const container = document.getElementById('sessionList');
+      if (!entries.length) {
+        container.innerHTML = '<p class="muted">No session entries yet.</p>';
+        return;
+      }
+      container.innerHTML = '';
+      entries.forEach(({time, desc}) => {
+        const node = document.createElement('div');
+        node.className = 'session-entry';
+        node.innerHTML = `<div class="session-time">${time}</div><div class="session-desc">${desc}</div>`;
+        container.appendChild(node);
+      });
+    }
+
+    function parseSessionLog(md) {
+      return md.split('\n')
+        .map(line => line.trim())
+        .filter(line => line.startsWith('- '))
+        .map(line => line.substring(2).trim())
+        .map(line => {
+          const parts = line.split('·');
+          const time = parts[0] ? parts[0].trim() : '??';
+          const desc = parts.slice(1).join('·').trim() || line;
+          return {time, desc};
+        });
+    }
+
+    async function loadSessionLog() {
+      const container = document.getElementById('sessionList');
+      try {
+        const res = await fetch('session.md');
+        if (!res.ok) throw new Error('Failed to load session log');
+        const text = await res.text();
+        const entries = parseSessionLog(text);
+        renderSessionLog(entries);
+      } catch (error) {
+        container.innerHTML = `<p class="muted">Session log is unavailable.</p>`;
+        console.error(error);
+      }
+    }
+
     loadBoard();
     setConfigStatus();
     setModelAndChannels();
+    loadSessionLog();
   </script>
 </body>
 </html>
