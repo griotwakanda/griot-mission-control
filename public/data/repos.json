@@ -1,28 +1,154 @@
 {
-  "repos": [
+  "github": [
+    {
+      "name": "wakanda-kanban",
+      "owner": "griotwakanda",
+      "fullName": "griotwakanda/wakanda-kanban",
+      "private": false,
+      "url": "https://github.com/griotwakanda/wakanda-kanban",
+      "updatedAt": "2026-03-11T01:58:13Z"
+    },
+    {
+      "name": "griot-mission-control",
+      "owner": "griotwakanda",
+      "fullName": "griotwakanda/griot-mission-control",
+      "private": false,
+      "url": "https://github.com/griotwakanda/griot-mission-control",
+      "updatedAt": "2026-03-05T21:46:32Z"
+    },
+    {
+      "name": "synthia-mission-control-negotiator",
+      "owner": "griotwakanda",
+      "fullName": "griotwakanda/synthia-mission-control-negotiator",
+      "private": false,
+      "url": "https://github.com/griotwakanda/synthia-mission-control-negotiator",
+      "updatedAt": "2026-03-04T07:08:52Z"
+    },
+    {
+      "name": "grocery-dashboard",
+      "owner": "griotwakanda",
+      "fullName": "griotwakanda/grocery-dashboard",
+      "private": false,
+      "url": "https://github.com/griotwakanda/grocery-dashboard",
+      "updatedAt": "2026-03-03T06:32:48Z"
+    },
+    {
+      "name": "firetv-mood-wall",
+      "owner": "griotwakanda",
+      "fullName": "griotwakanda/firetv-mood-wall",
+      "private": false,
+      "url": "https://github.com/griotwakanda/firetv-mood-wall",
+      "updatedAt": "2026-02-28T20:33:11Z"
+    }
+  ],
+  "local": [
+    {
+      "name": "workspace",
+      "path": "/Users/griotbot/.openclaw/workspace",
+      "branch": "fresh-start",
+      "clean": false,
+      "health": "dirty",
+      "lastCommit": "Add Vibeanium coding sub-agent profile",
+      "origin": "git@github.com:griotwakanda/test-repo.git"
+    },
+    {
+      "name": "boiadeiro",
+      "path": "/Users/griotbot/.openclaw/workspace/agents/boiadeiro",
+      "branch": "main",
+      "clean": false,
+      "health": "dirty",
+      "lastCommit": "chore: enforce diagnostic-first protocol and anti-assumption checklist",
+      "origin": null
+    },
+    {
+      "name": "jimmy",
+      "path": "/Users/griotbot/.openclaw/workspace/agents/jimmy",
+      "branch": "main",
+      "clean": false,
+      "health": "dirty",
+      "lastCommit": "Create firetv-mood-wall GitHub Pages mood artwork project",
+      "origin": null
+    },
+    {
+      "name": "firetv-mood-wall",
+      "path": "/Users/griotbot/.openclaw/workspace/agents/jimmy/firetv-mood-wall",
+      "branch": "main",
+      "clean": true,
+      "health": "clean",
+      "lastCommit": "chore: update mood to happy sunny day",
+      "origin": "git@github.com:griotwakanda/firetv-mood-wall.git"
+    },
+    {
+      "name": "synthia-mission-control-negotiator",
+      "path": "/Users/griotbot/.openclaw/workspace/agents/jimmy/synthia-mission-control-negotiator",
+      "branch": "main",
+      "clean": true,
+      "health": "clean",
+      "lastCommit": "Redesign Mission Control UI to emerald glass reference style",
+      "origin": "git@github.com:griotwakanda/synthia-mission-control-negotiator.git"
+    },
+    {
+      "name": "wakanda-kanban",
+      "path": "/Users/griotbot/.openclaw/workspace/agents/jimmy/wakanda-kanban",
+      "branch": "main",
+      "clean": true,
+      "health": "clean",
+      "lastCommit": "Pixel-pass redesign to closely mirror provided mobile reference",
+      "origin": "git@github.com:griotwakanda/wakanda-kanban.git"
+    },
+    {
+      "name": "grocery",
+      "path": "/Users/griotbot/.openclaw/workspace/grocery",
+      "branch": "main",
+      "clean": true,
+      "health": "clean",
+      "lastCommit": "chore: add 2026-03-01 No Frills receipt and refresh grocery data",
+      "origin": "git@github.com:griotwakanda/grocery-dashboard.git"
+    },
     {
       "name": "mission-control",
       "path": "/Users/griotbot/.openclaw/workspace/mission-control",
       "branch": "main",
       "clean": false,
       "health": "dirty",
-      "lastCommit": "WIP: static dashboard revamp in progress"
+      "lastCommit": "Revamp Mission Control to static snapshot dashboard",
+      "origin": "git@github.com:griotwakanda/griot-mission-control.git"
     },
     {
-      "name": "workspace",
-      "path": "/Users/griotbot/.openclaw/workspace",
+      "name": "tatersal-digital-showcase",
+      "path": "/Users/griotbot/.openclaw/workspace/tatersal-digital-showcase",
       "branch": "main",
       "clean": true,
       "health": "clean",
-      "lastCommit": "Recent memory + automation updates tracked"
+      "lastCommit": "feat: create Tatersal Digital landing + dashboard showcase demo",
+      "origin": "git@github.com:griotwakanda/tatersal-digital-showcase.git"
     },
     {
-      "name": "tatersal-digital",
-      "path": "/Users/griotbot/.openclaw/workspace/tatersal-digital",
+      "name": "tatersal-digital-ws",
+      "path": "/Users/griotbot/.openclaw/workspace/tatersal-digital-ws",
       "branch": "main",
       "clean": true,
       "health": "clean",
-      "lastCommit": "MVP baseline ready for partner onboarding"
+      "lastCommit": "feat: bootstrap websocket overlay bridge for OBS auction streaming",
+      "origin": "git@github.com:griotwakanda/tatersal-digital-ws.git"
+    },
+    {
+      "name": "tatersal-digital-ws-2",
+      "path": "/Users/griotbot/.openclaw/workspace/tatersal-digital-ws-2",
+      "branch": "main",
+      "clean": true,
+      "health": "clean",
+      "lastCommit": "chore: add docs folder for GitHub Pages static publishing",
+      "origin": "git@github.com:griotwakanda/tatersal-digital-ws-2.git"
+    },
+    {
+      "name": "tatersal-voice-attendant-poc",
+      "path": "/Users/griotbot/.openclaw/workspace/tatersal-voice-attendant-poc",
+      "branch": "main",
+      "clean": true,
+      "health": "clean",
+      "lastCommit": "feat: auto-start call flow with shimmer welcome prompt",
+      "origin": "git@github.com:griotwakanda/tatersal-voice-attendant-poc.git"
     }
   ]
 }

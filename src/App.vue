@@ -17,7 +17,7 @@ const overview = ref({
 })
 const agents = ref([])
 const automations = ref([])
-const repos = ref([])
+const repos = ref({ github: [], local: [] })
 const board = ref({ columns: { todo: [], inProgress: [], done: [], blocked: [] }, lastUpdated: 'Unknown' })
 const worklog = ref([])
 
@@ -67,7 +67,10 @@ async function loadData() {
     overview.value = overviewData
     agents.value = agentsData.agents || []
     automations.value = automationsData.automations || []
-    repos.value = reposData.repos || []
+    repos.value = {
+      github: reposData.github || [],
+      local: reposData.local || [],
+    }
     board.value = boardData
     worklog.value = worklogData.entries || []
   } catch (error) {
@@ -160,14 +163,41 @@ onMounted(loadData)
     </section>
 
     <section v-if="!loading && activeTab === 'Repos'" class="module-stack">
-      <article v-for="repo in repos" :key="repo.name" class="panel list-card">
-        <div class="row-between">
-          <h2>{{ repo.name }}</h2>
-          <span :class="['badge', statusClass(repo.health)]">{{ repo.health }}</span>
+      <article class="panel">
+        <div class="row-between section-heading">
+          <h2>GitHub</h2>
+          <span class="badge neutral">{{ repos.github.length }} repos</span>
         </div>
-        <p class="mono">{{ repo.path }}</p>
-        <p>Branch: {{ repo.branch }} · {{ repo.clean ? 'Clean' : 'Dirty' }}</p>
-        <p class="muted">{{ repo.lastCommit }}</p>
+        <div class="module-stack nested-stack">
+          <article v-for="repo in repos.github" :key="repo.fullName" class="panel list-card nested-card">
+            <div class="row-between">
+              <h2>{{ repo.name }}</h2>
+              <span :class="['badge', repo.private ? 'warn' : 'ok']">{{ repo.private ? 'private' : 'public' }}</span>
+            </div>
+            <p class="muted">{{ repo.fullName }}</p>
+            <p class="mono"><a :href="repo.url" target="_blank" rel="noreferrer">{{ repo.url }}</a></p>
+            <p class="muted">Updated: {{ repo.updatedAt }}</p>
+          </article>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="row-between section-heading">
+          <h2>Local</h2>
+          <span class="badge neutral">{{ repos.local.length }} repos</span>
+        </div>
+        <div class="module-stack nested-stack">
+          <article v-for="repo in repos.local" :key="repo.path" class="panel list-card nested-card">
+            <div class="row-between">
+              <h2>{{ repo.name }}</h2>
+              <span :class="['badge', statusClass(repo.health)]">{{ repo.health }}</span>
+            </div>
+            <p class="mono">{{ repo.path }}</p>
+            <p>Branch: {{ repo.branch }} · {{ repo.clean ? 'Clean' : 'Dirty' }}</p>
+            <p v-if="repo.origin" class="muted">Origin: {{ repo.origin }}</p>
+            <p class="muted">{{ repo.lastCommit }}</p>
+          </article>
+        </div>
       </article>
     </section>
 
