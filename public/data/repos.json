@@ -1,0 +1,28 @@
+{
+  "repos": [
+    {
+      "name": "mission-control",
+      "path": "/Users/griotbot/.openclaw/workspace/mission-control",
+      "branch": "main",
+      "clean": false,
+      "health": "dirty",
+      "lastCommit": "WIP: static dashboard revamp in progress"
+    },
+    {
+      "name": "workspace",
+      "path": "/Users/griotbot/.openclaw/workspace",
+      "branch": "main",
+      "clean": true,
+      "health": "clean",
+      "lastCommit": "Recent memory + automation updates tracked"
+    },
+    {
+      "name": "tatersal-digital",
+      "path": "/Users/griotbot/.openclaw/workspace/tatersal-digital",
+      "branch": "main",
+      "clean": true,
+      "health": "clean",
+      "lastCommit": "MVP baseline ready for partner onboarding"
+    }
+  ]
+}

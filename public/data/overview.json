@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2026-03-11 11:50 PDT",
+  "missionStatus": "Focused Execution",
+  "kpis": [
+    { "label": "Active Agents", "value": 2, "status": "active" },
+    { "label": "Enabled Automations", "value": 3, "status": "healthy" },
+    { "label": "Open Tasks", "value": 4, "status": "warning" },
+    { "label": "Completed Items", "value": 8, "status": "done" },
+    { "label": "Dirty Repos", "value": 1, "status": "warning" },
+    { "label": "Blockers", "value": 1, "status": "blocked" }
+  ],
+  "summary": "Mission Control is now local-first and static-hostable. Current operations are centered on grocery automation and dashboard reliability.",
+  "currentFocus": [
+    "Ship Wakanda Mission Control first-pass revamp",
+    "Finish grocery dashboard trends/filters",
+    "Set up automated snapshot generation for repos + board"
+  ],
+  "blockers": [
+    "Need decision on protected access strategy before exposing ops dashboard publicly"
+  ],
+  "recentCompleted": [
+    "Heartbeat email triage rules enabled",
+    "Morning brief cron delivered successfully",
+    "Memory rollup + rehydrate automation wired via LaunchAgents"
+  ]
+}

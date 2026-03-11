@@ -1,8 +1,8 @@
 :root {
   color-scheme: dark;
   font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #0b1020;
-  color: #eaf0ff;
+  background: #090b13;
+  color: #eef1ff;
 }
 
 * {
@@ -11,131 +11,182 @@
 
 body {
   margin: 0;
-  background: radial-gradient(1200px 700px at 20% -10%, rgba(79, 124, 255, 0.28), transparent 55%),
-    radial-gradient(900px 600px at 110% 10%, rgba(45, 212, 191, 0.22), transparent 55%),
-    radial-gradient(800px 600px at 30% 110%, rgba(255, 77, 109, 0.16), transparent 55%), #0b1020;
-}
-
-.wrap {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 24px 16px 40px;
-  display: grid;
-  gap: 14px;
-}
-
-.card {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 16px;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 14px;
+  min-height: 100vh;
+  background:
+    radial-gradient(900px 500px at 20% -10%, rgba(125, 74, 255, 0.23), transparent 60%),
+    radial-gradient(700px 450px at 100% 0%, rgba(0, 204, 170, 0.16), transparent 62%),
+    radial-gradient(600px 400px at 50% 120%, rgba(247, 174, 54, 0.12), transparent 58%),
+    #090b13;
 }
 
 h1,
 h2,
-p {
+p,
+ul {
   margin: 0;
 }
 
+ul {
+  padding-left: 1rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.app-shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1rem 0.9rem 2rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.panel {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(173, 162, 255, 0.25);
+  border-radius: 14px;
+  padding: 0.9rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  color: #a99fff;
+}
+
 h1 {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+  margin-top: 0.2rem;
 }
 
 h2 {
   font-size: 1rem;
-  margin-bottom: 10px;
 }
 
 .muted {
-  color: #b4c0e4;
+  color: #b9bfd4;
   font-size: 0.9rem;
 }
 
-.kpis {
+.tabs {
   display: grid;
-  gap: 12px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
 }
 
-.label {
-  color: #b4c0e4;
-  text-transform: uppercase;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
+.tab-pill {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.02);
+  color: #eef1ff;
+  min-height: 44px;
+  font-weight: 600;
 }
 
-.value {
-  margin-top: 8px;
-  font-size: 1.5rem;
+.tab-pill.active {
+  background: linear-gradient(135deg, rgba(126, 87, 255, 0.85), rgba(16, 143, 128, 0.8));
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.kpi-grid,
+.board-grid {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.kpi-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.kpi-card .value {
+  margin: 0.35rem 0 0.45rem;
+  font-size: 1.55rem;
   font-weight: 700;
 }
 
-.board-grid {
-  display: grid;
-  gap: 12px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.label {
+  color: #b8b0ff;
+  font-size: 0.73rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.column ul {
-  margin: 0;
-  padding-left: 18px;
+.module-stack {
   display: grid;
-  gap: 8px;
+  gap: 0.65rem;
 }
 
-.session-section {
-  display: grid;
-  gap: 14px;
-}
-
-.section-title {
+.row-between {
   display: flex;
-  align-items: baseline;
   justify-content: space-between;
-  gap: 12px;
+  gap: 0.6rem;
+  align-items: center;
 }
 
-.session-form {
+.badge {
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border: 1px solid transparent;
+}
+
+.badge.ok {
+  background: rgba(57, 201, 140, 0.2);
+  color: #9cf6ca;
+  border-color: rgba(57, 201, 140, 0.5);
+}
+
+.badge.warn {
+  background: rgba(245, 173, 64, 0.2);
+  color: #ffdb9c;
+  border-color: rgba(245, 173, 64, 0.5);
+}
+
+.badge.bad {
+  background: rgba(231, 66, 66, 0.22);
+  color: #ffb3b3;
+  border-color: rgba(231, 66, 66, 0.5);
+}
+
+.badge.neutral {
+  background: rgba(152, 166, 201, 0.2);
+  color: #d7def2;
+  border-color: rgba(152, 166, 201, 0.45);
+}
+
+.board-column {
   display: grid;
-  grid-template-columns: 160px 1fr auto;
-  gap: 10px;
-  align-items: end;
+  gap: 0.45rem;
 }
 
-label {
+.log-row {
   display: grid;
-  gap: 6px;
-  font-size: 0.86rem;
+  gap: 0.35rem;
 }
 
-input {
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(4, 10, 24, 0.8);
-  color: #eaf0ff;
-  padding: 10px;
+.mono {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.82rem;
+  color: #9fa9d0;
 }
 
 button {
   border-radius: 10px;
   border: 1px solid transparent;
-  background: #4f7cff;
+  background: #7a5cff;
   color: white;
-  padding: 10px 14px;
   font-weight: 600;
-  cursor: pointer;
-}
-
-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+  min-height: 42px;
+  padding: 0 0.8rem;
 }
 
 button.ghost {
@@ -143,54 +194,35 @@ button.ghost {
   border-color: rgba(255, 255, 255, 0.3);
 }
 
-.session-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 8px;
-}
-
-.session-row {
-  display: grid;
-  grid-template-columns: 68px 1fr;
-  gap: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 8px;
-}
-
-.time {
-  color: #95a7da;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-}
-
 .error {
-  color: #ff98ad;
+  color: #ffb3bf;
 }
 
-.history-spotlight {
-  display: grid;
-  gap: 10px;
-}
-
-.history-spotlight img {
-  width: 100%;
-  border-radius: 12px;
-  max-height: 300px;
-  object-fit: cover;
-}
-
-code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-}
-
-@media (max-width: 900px) {
-  .kpis,
-  .board-grid {
-    grid-template-columns: 1fr;
+@media (min-width: 760px) {
+  .app-shell {
+    padding: 1.3rem 1.2rem 2.2rem;
+    gap: 0.9rem;
   }
 
-  .session-form {
-    grid-template-columns: 1fr;
+  .tabs {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .kpi-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .board-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .kpi-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .board-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }

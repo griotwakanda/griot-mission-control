@@ -1,0 +1,26 @@
+{
+  "lastUpdated": "2026-03-11",
+  "columns": {
+    "todo": [
+      "Grocery Dashboard (HTML): host with an easy URL (local gateway path + optional remote access)",
+      "Grocery Pipeline: automate receipt ingestion (Telegram receipt photo -> OCR -> parse -> append to CSV -> export JSON)",
+      "Grocery Dashboard (HTML): add trends (weekly/monthly), filters (store/date), and top swaps recommendations"
+    ],
+    "inProgress": [
+      "Grocery Dashboard (HTML): modern embedded dashboard (grocery-dashboard.html) reading grocery-data.json"
+    ],
+    "done": [
+      "Cancelled: Looker Studio visuals approach (replaced by HTML dashboard)",
+      "Gmail connected via OAuth (griotbot@gmail.com)",
+      "Telegram bot connected + allowlist",
+      "Daily 7am Telegram morning brief cron job created and verified",
+      "Heartbeat email triage rules (hourly checks)",
+      "Disabled Tatersal Boiadeiro Alignment & AI Finance Analyst Midday cron jobs",
+      "Created 13h Boi Gordo (São Luís de Montes Belos, GO) cron job",
+      "Implemented memory rollup + rehydrate scripts with LaunchAgents"
+    ],
+    "blocked": [
+      "Mission Control public deployment pending access-protection decision"
+    ]
+  }
+}

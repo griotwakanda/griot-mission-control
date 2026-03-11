@@ -1,0 +1,36 @@
+{
+  "automations": [
+    {
+      "name": "Telegram Morning Brief",
+      "schedule": "Daily 07:00",
+      "state": "active",
+      "lastRun": "2026-03-11 07:00 PDT",
+      "nextRun": "2026-03-12 07:00 PDT",
+      "summary": "Sends daily summary with priorities and key reminders."
+    },
+    {
+      "name": "Memory Rollup",
+      "schedule": "Daily 02:05",
+      "state": "active",
+      "lastRun": "2026-03-11 02:05 PDT",
+      "nextRun": "2026-03-12 02:05 PDT",
+      "summary": "Archives and rolls up memory context for continuity."
+    },
+    {
+      "name": "Memory Rehydrate",
+      "schedule": "Daily 07:10",
+      "state": "active",
+      "lastRun": "2026-03-11 07:10 PDT",
+      "nextRun": "2026-03-12 07:10 PDT",
+      "summary": "Prepares next-session memory summary from archives."
+    },
+    {
+      "name": "AI Finance Analyst Midday",
+      "schedule": "Weekdays 12:00",
+      "state": "paused",
+      "lastRun": "Paused by request",
+      "nextRun": "N/A",
+      "summary": "Paused per Daniel request while ops priorities are rebalanced."
+    }
+  ]
+}

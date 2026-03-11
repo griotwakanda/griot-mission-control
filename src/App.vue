@@ -1,235 +1,198 @@
 <script setup>
-import { onMounted, computed, ref } from 'vue'
-import {
-  addDoc,
-  collection,
-  onSnapshot,
-  orderBy,
-  query,
-  serverTimestamp,
-} from 'firebase/firestore'
-import { db, firebaseReady, firebaseMissingKeys } from './firebase'
+import { computed, onMounted, ref } from 'vue'
 
-const board = ref({ todo: [], inProgress: [], done: [], lastUpdated: 'Unknown' })
-const boardError = ref('')
+const tabs = ['Overview', 'Agents', 'Automations', 'Repos', 'Board', 'Log']
+const activeTab = ref('Overview')
+const loading = ref(true)
+const loadError = ref('')
 
-const sessionEntries = ref([])
-const logError = ref('')
-const addError = ref('')
-const isSaving = ref(false)
-
-const timeLabel = ref('')
-const description = ref('')
-
-const totalTasks = computed(
-  () => board.value.todo.length + board.value.inProgress.length + board.value.done.length,
-)
-
-function parseBoard(md) {
-  const lines = md.split('\n')
-  let current = null
-  const output = { todo: [], inProgress: [], done: [], lastUpdated: 'Unknown' }
-
-  for (const rawLine of lines) {
-    const line = rawLine.trim()
-
-    if (line.toLowerCase().startsWith('last updated:')) {
-      output.lastUpdated = line.replace(/last updated:/i, '').trim() || 'Unknown'
-      continue
-    }
-
-    if (line === '## TODO') current = 'todo'
-    else if (line === '## IN PROGRESS') current = 'inProgress'
-    else if (line === '## DONE') current = 'done'
-    else if (line.startsWith('- ') && current) output[current].push(line.slice(2).trim())
-  }
-
-  return output
-}
-
-async function loadBoard() {
-  boardError.value = ''
-
-  try {
-    const response = await fetch('/BOARD.md', { cache: 'no-store' })
-    if (!response.ok) throw new Error('Could not load BOARD.md')
-    const markdown = await response.text()
-    board.value = parseBoard(markdown)
-  } catch (error) {
-    boardError.value = error instanceof Error ? error.message : 'Unexpected board load error'
-  }
-}
-
-function formatTimeLabel(date = new Date()) {
-  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-}
-
-function subscribeSessionLog() {
-  if (!firebaseReady || !db) {
-    logError.value = `Firebase config is incomplete. Missing: ${firebaseMissingKeys.join(', ')}`
-    return
-  }
-
-  const logQuery = query(collection(db, 'sessionLog'), orderBy('createdAt', 'desc'))
-
-  onSnapshot(
-    logQuery,
-    (snapshot) => {
-      sessionEntries.value = snapshot.docs.map((doc) => {
-        const data = doc.data()
-        return {
-          id: doc.id,
-          timeLabel: data.timeLabel || '??:??',
-          description: data.description || '',
-        }
-      })
-      logError.value = ''
-    },
-    (error) => {
-      logError.value = error.message || 'Could not load Firestore session log'
-    },
-  )
-}
-
-async function addSessionEntry() {
-  addError.value = ''
-
-  if (!firebaseReady || !db) {
-    addError.value = 'Firebase is not configured yet.'
-    return
-  }
-
-  if (!description.value.trim()) {
-    addError.value = 'Description is required.'
-    return
-  }
-
-  const entryTime = timeLabel.value.trim() || formatTimeLabel()
-
-  isSaving.value = true
-  try {
-    await addDoc(collection(db, 'sessionLog'), {
-      createdAt: serverTimestamp(),
-      timeLabel: entryTime,
-      description: description.value.trim(),
-    })
-
-    timeLabel.value = ''
-    description.value = ''
-  } catch (error) {
-    addError.value = error instanceof Error ? error.message : 'Failed to save entry'
-  } finally {
-    isSaving.value = false
-  }
-}
-
-onMounted(() => {
-  loadBoard()
-  subscribeSessionLog()
+const overview = ref({
+  missionStatus: 'Initializing',
+  generatedAt: 'Unknown',
+  kpis: [],
+  summary: '',
+  currentFocus: [],
+  blockers: [],
+  recentCompleted: [],
 })
+const agents = ref([])
+const automations = ref([])
+const repos = ref([])
+const board = ref({ columns: { todo: [], inProgress: [], done: [], blocked: [] }, lastUpdated: 'Unknown' })
+const worklog = ref([])
+
+const boardColumns = computed(() => [
+  { key: 'todo', label: 'TODO' },
+  { key: 'inProgress', label: 'IN PROGRESS' },
+  { key: 'done', label: 'DONE' },
+  { key: 'blocked', label: 'BLOCKED' },
+])
+
+const statusClass = (value = '') => {
+  const normalized = String(value).toLowerCase()
+  if (['online', 'healthy', 'enabled', 'active', 'clean', 'done', 'ok', 'success'].includes(normalized)) {
+    return 'ok'
+  }
+  if (['warning', 'paused', 'idle', 'degraded', 'dirty', 'in-progress'].includes(normalized)) {
+    return 'warn'
+  }
+  if (['blocked', 'error', 'offline', 'failed', 'critical'].includes(normalized)) {
+    return 'bad'
+  }
+  return 'neutral'
+}
+
+async function loadSnapshot(path) {
+  const response = await fetch(path, { cache: 'no-store' })
+  if (!response.ok) {
+    throw new Error(`Failed to load ${path}`)
+  }
+  return response.json()
+}
+
+async function loadData() {
+  loading.value = true
+  loadError.value = ''
+
+  try {
+    const [overviewData, agentsData, automationsData, reposData, boardData, worklogData] = await Promise.all([
+      loadSnapshot('/data/overview.json'),
+      loadSnapshot('/data/agents.json'),
+      loadSnapshot('/data/automations.json'),
+      loadSnapshot('/data/repos.json'),
+      loadSnapshot('/data/board.json'),
+      loadSnapshot('/data/worklog.json'),
+    ])
+
+    overview.value = overviewData
+    agents.value = agentsData.agents || []
+    automations.value = automationsData.automations || []
+    repos.value = reposData.repos || []
+    board.value = boardData
+    worklog.value = worklogData.entries || []
+  } catch (error) {
+    loadError.value = error instanceof Error ? error.message : 'Could not load dashboard snapshots.'
+  } finally {
+    loading.value = false
+  }
+}
+
+onMounted(loadData)
 </script>
 
 <template>
-  <main class="wrap">
-    <header class="header card">
+  <main class="app-shell">
+    <header class="topbar panel">
       <div>
-        <h1>Griot — Mission Control</h1>
-        <p class="muted">Last updated: {{ board.lastUpdated }}</p>
+        <p class="eyebrow">Wakanda Ops Grid</p>
+        <h1>Mission Control</h1>
+        <p class="muted">{{ overview.generatedAt }} · Status: {{ overview.missionStatus }}</p>
       </div>
-      <button class="ghost" @click="loadBoard">Refresh board</button>
+      <button class="ghost" @click="loadData">Refresh Snapshot</button>
     </header>
 
-    <section class="kpis">
-      <article class="card">
-        <p class="label">Total Tasks</p>
-        <p class="value">{{ totalTasks }}</p>
-      </article>
-      <article class="card">
-        <p class="label">In Progress</p>
-        <p class="value">{{ board.inProgress.length }}</p>
-      </article>
-      <article class="card">
-        <p class="label">Done</p>
-        <p class="value">{{ board.done.length }}</p>
-      </article>
-    </section>
+    <nav class="tabs panel" aria-label="Mission control modules">
+      <button
+        v-for="tab in tabs"
+        :key="tab"
+        :class="['tab-pill', { active: activeTab === tab }]"
+        @click="activeTab = tab"
+      >
+        {{ tab }}
+      </button>
+    </nav>
 
-    <p v-if="boardError" class="error card">{{ boardError }}</p>
+    <p v-if="loadError" class="panel error">{{ loadError }}</p>
+    <p v-if="loading" class="panel muted">Loading operational snapshot…</p>
 
-    <section class="board-grid">
-      <article class="card column">
-        <h2>TODO ({{ board.todo.length }})</h2>
-        <ul v-if="board.todo.length">
-          <li v-for="task in board.todo" :key="task">{{ task }}</li>
-        </ul>
-        <p v-else class="muted">No tasks.</p>
-      </article>
-
-      <article class="card column">
-        <h2>IN PROGRESS ({{ board.inProgress.length }})</h2>
-        <ul v-if="board.inProgress.length">
-          <li v-for="task in board.inProgress" :key="task">{{ task }}</li>
-        </ul>
-        <p v-else class="muted">No active tasks.</p>
-      </article>
-
-      <article class="card column">
-        <h2>DONE ({{ board.done.length }})</h2>
-        <ul v-if="board.done.length">
-          <li v-for="task in board.done" :key="task">{{ task }}</li>
-        </ul>
-        <p v-else class="muted">No completed tasks listed.</p>
-      </article>
-    </section>
-
-    <section class="card session-section">
-      <div class="section-title">
-        <h2>Session log</h2>
-        <p class="muted">Firestore collection: <code>sessionLog</code></p>
+    <section v-if="!loading && activeTab === 'Overview'" class="module-stack">
+      <div class="kpi-grid">
+        <article v-for="kpi in overview.kpis" :key="kpi.label" class="panel kpi-card">
+          <p class="label">{{ kpi.label }}</p>
+          <p class="value">{{ kpi.value }}</p>
+          <span :class="['badge', statusClass(kpi.status)]">{{ kpi.status }}</span>
+        </article>
       </div>
 
-      <form class="session-form" @submit.prevent="addSessionEntry">
-        <label>
-          Time label
-          <input v-model="timeLabel" type="text" placeholder="09:15" maxlength="20" />
-        </label>
+      <article class="panel">
+        <h2>Mission Summary</h2>
+        <p>{{ overview.summary }}</p>
+      </article>
 
-        <label class="wide">
-          Description
-          <input
-            v-model="description"
-            type="text"
-            placeholder="Short note about what was completed"
-            maxlength="220"
-            required
-          />
-        </label>
+      <article class="panel">
+        <h2>Current Focus</h2>
+        <ul>
+          <li v-for="item in overview.currentFocus" :key="item">{{ item }}</li>
+        </ul>
+      </article>
 
-        <button :disabled="isSaving" type="submit">{{ isSaving ? 'Saving...' : 'Add entry' }}</button>
-      </form>
-
-      <p v-if="addError" class="error">{{ addError }}</p>
-      <p v-if="logError" class="error">{{ logError }}</p>
-
-      <ul v-if="sessionEntries.length" class="session-list">
-        <li v-for="entry in sessionEntries" :key="entry.id" class="session-row">
-          <span class="time">{{ entry.timeLabel }}</span>
-          <span>{{ entry.description }}</span>
-        </li>
-      </ul>
-      <p v-else class="muted">No session entries yet.</p>
+      <article class="panel">
+        <h2>Blockers / Decisions</h2>
+        <ul v-if="overview.blockers.length">
+          <li v-for="item in overview.blockers" :key="item">{{ item }}</li>
+        </ul>
+        <p v-else class="muted">No blockers right now.</p>
+      </article>
     </section>
 
-    <section class="card history-spotlight">
-      <h2>Hoje na história</h2>
-      <p>
-        Em 24 de fevereiro de 1582, o Papa Gregório XIII apresentou o novo calendário que corrigiu
-        a perda acumulada do ano solar.
-      </p>
-      <img
-        src="/hoje/papa-gregory-calendario.png"
-        alt="Pintura do Papa Gregório XIII com referência ao calendário gregoriano"
-      />
+    <section v-if="!loading && activeTab === 'Agents'" class="module-stack">
+      <article v-for="agent in agents" :key="agent.name" class="panel list-card">
+        <div class="row-between">
+          <h2>{{ agent.name }}</h2>
+          <span :class="['badge', statusClass(agent.status)]">{{ agent.status }}</span>
+        </div>
+        <p class="muted">{{ agent.role }} · {{ agent.model }}</p>
+        <p>{{ agent.taskSummary }}</p>
+        <p class="mono">Last active: {{ agent.lastActive }}</p>
+      </article>
+    </section>
+
+    <section v-if="!loading && activeTab === 'Automations'" class="module-stack">
+      <article v-for="job in automations" :key="job.name" class="panel list-card">
+        <div class="row-between">
+          <h2>{{ job.name }}</h2>
+          <span :class="['badge', statusClass(job.state)]">{{ job.state }}</span>
+        </div>
+        <p class="mono">{{ job.schedule }}</p>
+        <p class="muted">Last run: {{ job.lastRun }} · Next run: {{ job.nextRun }}</p>
+        <p>{{ job.summary }}</p>
+      </article>
+    </section>
+
+    <section v-if="!loading && activeTab === 'Repos'" class="module-stack">
+      <article v-for="repo in repos" :key="repo.name" class="panel list-card">
+        <div class="row-between">
+          <h2>{{ repo.name }}</h2>
+          <span :class="['badge', statusClass(repo.health)]">{{ repo.health }}</span>
+        </div>
+        <p class="mono">{{ repo.path }}</p>
+        <p>Branch: {{ repo.branch }} · {{ repo.clean ? 'Clean' : 'Dirty' }}</p>
+        <p class="muted">{{ repo.lastCommit }}</p>
+      </article>
+    </section>
+
+    <section v-if="!loading && activeTab === 'Board'" class="module-stack">
+      <p class="muted">Snapshot updated: {{ board.lastUpdated }}</p>
+      <div class="board-grid">
+        <article v-for="column in boardColumns" :key="column.key" class="panel board-column">
+          <h2>{{ column.label }} ({{ board.columns?.[column.key]?.length || 0 }})</h2>
+          <ul v-if="board.columns?.[column.key]?.length">
+            <li v-for="task in board.columns[column.key]" :key="task">{{ task }}</li>
+          </ul>
+          <p v-else class="muted">No items.</p>
+        </article>
+      </div>
+    </section>
+
+    <section v-if="!loading && activeTab === 'Log'" class="module-stack">
+      <article v-for="entry in worklog" :key="entry.timestamp + entry.summary" class="panel log-row">
+        <div class="row-between">
+          <p class="mono">{{ entry.timestamp }}</p>
+          <span :class="['badge', statusClass(entry.status)]">{{ entry.status }}</span>
+        </div>
+        <p class="muted">{{ entry.source }}</p>
+        <p>{{ entry.summary }}</p>
+      </article>
     </section>
   </main>
 </template>
