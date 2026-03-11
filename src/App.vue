@@ -30,10 +30,10 @@ const board = ref({ columns: { todo: [], inProgress: [], done: [], blocked: [] }
 const worklog = ref([])
 
 const boardColumns = computed(() => [
-  { key: 'todo', label: 'TODO' },
-  { key: 'inProgress', label: 'IN PROGRESS' },
-  { key: 'done', label: 'DONE' },
-  { key: 'blocked', label: 'BLOCKED' },
+  { key: 'todo', label: 'Todo' },
+  { key: 'inProgress', label: 'In progress' },
+  { key: 'done', label: 'Done' },
+  { key: 'blocked', label: 'Blocked' },
 ])
 
 const formatRelativeTimestamp = (value) => {
@@ -120,16 +120,15 @@ onMounted(loadData)
   <main class="app-shell">
     <div class="ambient-layer" aria-hidden="true"></div>
 
-    <header class="topbar shell-card">
+    <header class="topbar">
       <div>
-        <p class="eyebrow">Wakanda Ops Grid</p>
-        <h1>Mission Control</h1>
-        <p class="muted">{{ formatRelativeTimestamp(overview.generatedAt) }} · Status: {{ overview.missionStatus }}</p>
+        <p class="title-mark">Mission Control</p>
+        <p class="muted">{{ formatRelativeTimestamp(overview.generatedAt) }} · {{ overview.missionStatus }}</p>
       </div>
-      <button class="ghost" @click="loadData">Refresh Snapshot</button>
+      <button class="ghost" @click="loadData">Refresh</button>
     </header>
 
-    <nav class="tabs shell-card" aria-label="Mission control modules">
+    <nav class="tabs" aria-label="Mission control modules">
       <button
         v-for="tab in tabs"
         :key="tab"
@@ -145,16 +144,12 @@ onMounted(loadData)
     <p v-if="loading" class="shell-card muted">Loading operational snapshot…</p>
 
     <section v-if="!loading && activeTab === 'Overview'" class="module-stack">
-      <article class="hero-panel shell-card">
-        <div>
-          <p class="label">Command posture</p>
-          <h2 class="hero-title">{{ overview.missionStatus }}</h2>
-          <p class="hero-copy">{{ overview.summary }}</p>
-        </div>
+      <article class="summary-band shell-card">
+        <p class="hero-copy">{{ overview.summary }}</p>
         <div class="hero-meta">
           <span class="badge neutral">{{ agents.length }} agents</span>
           <span class="badge neutral">{{ automations.length }} automations</span>
-          <span class="badge neutral">{{ repos.github.length }} GitHub repos</span>
+          <span class="badge neutral">{{ repos.github.length }} repos</span>
         </div>
       </article>
 
@@ -168,14 +163,14 @@ onMounted(loadData)
 
       <div class="section-grid">
         <article class="shell-card">
-          <h2>Current Focus</h2>
+          <h2>Focus</h2>
           <ul>
             <li v-for="item in overview.currentFocus" :key="item">{{ item }}</li>
           </ul>
         </article>
 
         <article class="shell-card">
-          <h2>Blockers / Decisions</h2>
+          <h2>Decisions</h2>
           <ul v-if="overview.blockers.length">
             <li v-for="item in overview.blockers" :key="item">{{ item }}</li>
           </ul>
