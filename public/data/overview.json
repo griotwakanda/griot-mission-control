@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-11 12:17 PDT",
+  "generatedAt": "2026-03-11 13:10 PDT",
   "missionStatus": "Green Zone",
   "kpis": [
     {
@@ -36,8 +36,8 @@
   "summary": "Mission Control is now driven by local snapshots generated from the real workspace state instead of hand-seeded placeholders.",
   "currentFocus": [
     "Keep Mission Control data trustworthy",
-    "Grocery Dashboard (HTML): modern embedded dashboard (grocery-dashboard.html) reading grocery-data.json",
-    "Grocery Dashboard (HTML): host with an easy URL (local gateway path + optional remote access)"
+    "Wakanda Mission Control redesign, deployment, and data cleanup",
+    "Define the next project to replace the archived Grocery effort"
   ],
   "blockers": [],
   "recentCompleted": [

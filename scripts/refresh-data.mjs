@@ -101,6 +101,11 @@ function parseBoardMarkdown(markdown) {
   return { lastUpdated, columns, dailyLog }
 }
 
+function shouldHideRepo(repo) {
+  const haystack = JSON.stringify(repo).toLowerCase()
+  return haystack.includes('grocery')
+}
+
 function getGithubRepos() {
   const raw = runSafe('gh', [
     'repo', 'list', 'griotwakanda', '--limit', '200',
@@ -115,7 +120,7 @@ function getGithubRepos() {
     private: r.isPrivate,
     url: r.url,
     updatedAt: r.updatedAt,
-  }))
+  })).filter((repo) => !shouldHideRepo(repo))
 }
 
 function getLocalRepoPaths() {
@@ -154,7 +159,7 @@ function getLocalRepos() {
       lastCommit,
       origin: origin || null,
     }
-  })
+  }).filter((repo) => !shouldHideRepo(repo))
 }
 
 function formatCronSchedule(schedule) {

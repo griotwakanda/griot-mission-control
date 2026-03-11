@@ -2,12 +2,12 @@
   "lastUpdated": "2026-03-04",
   "columns": {
     "todo": [
-      "Grocery Dashboard (HTML): host with an easy URL (local gateway path + optional remote access)",
-      "Grocery Pipeline: automate receipt ingestion (Telegram receipt photo -> OCR -> parse -> append to CSV -> export JSON)",
-      "Grocery Dashboard (HTML): add trends (weekly/monthly), filters (store/date), and top swaps recommendations"
+      "Define the next project to replace the archived Grocery effort",
+      "Finalize Wakanda Mission Control polish + operating workflow",
+      "Decide the first high-leverage dashboard module after Mission Control"
     ],
     "inProgress": [
-      "Grocery Dashboard (HTML): modern embedded dashboard (grocery-dashboard.html) reading grocery-data.json"
+      "Wakanda Mission Control redesign, deployment, and data cleanup"
     ],
     "done": [
       "Cancelled: Looker Studio visuals approach (replaced by HTML dashboard)",

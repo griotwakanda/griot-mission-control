@@ -25,14 +25,6 @@
       "updatedAt": "2026-03-04T07:08:52Z"
     },
     {
-      "name": "grocery-dashboard",
-      "owner": "griotwakanda",
-      "fullName": "griotwakanda/grocery-dashboard",
-      "private": false,
-      "url": "https://github.com/griotwakanda/grocery-dashboard",
-      "updatedAt": "2026-03-03T06:32:48Z"
-    },
-    {
       "name": "firetv-mood-wall",
       "owner": "griotwakanda",
       "fullName": "griotwakanda/firetv-mood-wall",
@@ -97,21 +89,12 @@
       "origin": "git@github.com:griotwakanda/wakanda-kanban.git"
     },
     {
-      "name": "grocery",
-      "path": "/Users/griotbot/.openclaw/workspace/grocery",
-      "branch": "main",
-      "clean": true,
-      "health": "clean",
-      "lastCommit": "chore: add 2026-03-01 No Frills receipt and refresh grocery data",
-      "origin": "git@github.com:griotwakanda/grocery-dashboard.git"
-    },
-    {
       "name": "mission-control",
       "path": "/Users/griotbot/.openclaw/workspace/mission-control",
       "branch": "main",
       "clean": false,
       "health": "dirty",
-      "lastCommit": "Revamp Mission Control to static snapshot dashboard",
+      "lastCommit": "Redesign Mission Control with premium fintech afrofuturist UI shell",
       "origin": "git@github.com:griotwakanda/griot-mission-control.git"
     },
     {
