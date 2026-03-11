@@ -157,26 +157,57 @@ function getLocalRepos() {
   })
 }
 
+function formatCronSchedule(schedule) {
+  if (!schedule) return 'custom'
+  if (schedule.kind === 'cron') return `${schedule.expr} (${schedule.tz || 'UTC'})`
+  if (schedule.kind === 'every') return `every ${schedule.everyMs}ms`
+  if (schedule.kind === 'at') return schedule.at || 'one-shot'
+  return schedule.kind || 'custom'
+}
+
+function formatTimestamp(msOrIso) {
+  if (!msOrIso) return 'Unknown'
+  const date = typeof msOrIso === 'number' ? new Date(msOrIso) : new Date(msOrIso)
+  if (Number.isNaN(date.getTime())) return String(msOrIso)
+  return toPdtStamp(date)
+}
+
 function getAgents() {
-  const now = toPdtStamp()
-  return [
-    {
-      name: 'Griot',
-      role: 'Main strategic operator',
-      model: 'gpt-5.4',
-      status: 'online',
-      lastActive: now,
-      taskSummary: 'Coordinating workspace execution, memory, and operational planning.',
-    },
-    {
-      name: 'Vibeanium',
-      role: 'Coding-specialized sub-agent',
-      model: 'gpt-5.3-codex',
-      status: 'active',
-      lastActive: now,
-      taskSummary: 'Available for implementation, debugging, refactoring, and code review on demand.',
-    },
-  ]
+  const raw = runSafe('openclaw', ['status', '--json'])
+  if (!raw) {
+    return [
+      {
+        name: 'Griot',
+        role: 'Main strategic operator',
+        model: 'gpt-5.4',
+        status: 'online',
+        lastActive: toPdtStamp(),
+        taskSummary: 'Operational state unavailable; using fallback snapshot.',
+      },
+    ]
+  }
+
+  const data = JSON.parse(raw)
+  const agentMeta = new Map((data.agents?.agents || []).map((agent) => [agent.id, agent]))
+  const recentSessions = data.sessions?.recent || []
+
+  return (data.agents?.agents || []).map((agent) => {
+    const recent = recentSessions.find((session) => session.agentId === agent.id || session.model?.includes(agent.id))
+    const status = agent.sessionsCount > 0 ? 'online' : 'idle'
+    const model = recent?.model || data.sessions?.defaults?.model || 'unknown'
+    const lastActive = agent.lastUpdatedAt ? formatTimestamp(agent.lastUpdatedAt) : 'Never'
+    const sessionCount = agent.sessionsCount ?? 0
+    return {
+      name: agent.id === 'main' ? 'Griot' : agent.id[0].toUpperCase() + agent.id.slice(1),
+      role: agent.id === 'main' ? 'Main strategic operator' : 'Specialized agent',
+      model,
+      status,
+      lastActive,
+      taskSummary: sessionCount > 0
+        ? `${sessionCount} session${sessionCount === 1 ? '' : 's'} tracked. Most recent context usage: ${recent?.percentUsed ?? '?'}%.`
+        : 'No tracked sessions yet.',
+    }
+  })
 }
 
 function getAutomations() {
@@ -188,30 +219,41 @@ function getAutomations() {
   const data = JSON.parse(raw)
   const jobs = Array.isArray(data) ? data : data.jobs || []
   return jobs.map((job) => ({
-    name: job.name || job.jobId || 'Unnamed job',
-    schedule: job.schedule?.expr || job.schedule?.kind || 'custom',
-    state: job.enabled === false ? 'paused' : 'active',
-    lastRun: job.lastRunAt || 'Unknown',
-    nextRun: job.nextRunAt || 'Unknown',
-    summary: job.payload?.text || job.payload?.message || job.payload?.kind || 'Automation job',
+    name: job.name || job.id || 'Unnamed job',
+    schedule: formatCronSchedule(job.schedule),
+    state: job.enabled === false ? 'paused' : (job.state?.lastStatus === 'ok' ? 'active' : (job.state?.lastStatus || 'active')),
+    lastRun: formatTimestamp(job.state?.lastRunAtMs),
+    nextRun: formatTimestamp(job.state?.nextRunAtMs),
+    summary: job.description || job.payload?.text || job.payload?.message || job.payload?.kind || 'Automation job',
   }))
 }
 
-function getWorklog(boardDailyLog) {
-  const existingPath = path.join(dataDir, 'worklog.json')
-  const existing = fs.existsSync(existingPath)
-    ? JSON.parse(fs.readFileSync(existingPath, 'utf8')).entries || []
-    : []
+function getMissionControlCommits(limit = 6) {
+  const raw = runSafe('git', ['-C', projectRoot, 'log', `-n`, String(limit), '--pretty=format:%ad\t%s', '--date=iso'])
+  if (!raw) return []
+  return raw.split(/\r?\n/).filter(Boolean).map((line) => {
+    const [timestamp, summary] = line.split('\t')
+    return {
+      timestamp: formatTimestamp(timestamp),
+      source: 'mission-control git',
+      summary,
+      status: 'done',
+    }
+  })
+}
 
-  const derived = boardDailyLog.slice(0, 6).map((item, index) => ({
+function getWorklog(boardDailyLog) {
+  const derivedBoard = boardDailyLog.slice(0, 6).map((item, index) => ({
     timestamp: `${toDateOnly()} · log-${index + 1}`,
     source: 'BOARD.md',
     summary: item,
     status: 'done',
   }))
 
+  const commitEntries = getMissionControlCommits(6)
+
   const seen = new Set()
-  return [...derived, ...existing].filter((entry) => {
+  return [...commitEntries, ...derivedBoard].filter((entry) => {
     const key = `${entry.timestamp}|${entry.summary}`
     if (seen.has(key)) return false
     seen.add(key)

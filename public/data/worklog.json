@@ -1,6 +1,42 @@
 {
   "entries": [
     {
+      "timestamp": "2026-03-11 12:14 PDT",
+      "source": "mission-control git",
+      "summary": "Add Mission Control snapshot refresh pipeline",
+      "status": "done"
+    },
+    {
+      "timestamp": "2026-03-11 11:54 PDT",
+      "source": "mission-control git",
+      "summary": "Revamp Mission Control to static snapshot dashboard",
+      "status": "done"
+    },
+    {
+      "timestamp": "2026-03-05 21:32 PST",
+      "source": "mission-control git",
+      "summary": "feat: migrate mission control to Vue + Firebase session log",
+      "status": "done"
+    },
+    {
+      "timestamp": "2026-03-05 13:40 PST",
+      "source": "mission-control git",
+      "summary": "feat: add session log tracking",
+      "status": "done"
+    },
+    {
+      "timestamp": "2026-02-24 13:28 PST",
+      "source": "mission-control git",
+      "summary": "chore: move text to footer",
+      "status": "done"
+    },
+    {
+      "timestamp": "2026-02-24 12:45 PST",
+      "source": "mission-control git",
+      "summary": "feat: add hoje historical background",
+      "status": "done"
+    },
+    {
       "timestamp": "2026-03-11 · log-1",
       "source": "BOARD.md",
       "summary": "09:04am: Wakanda Mission Control refreshed — removed stray hero eyebrow, added cron state badges (active/paused styling + default Active), and wired Boi Gordo cron tag/state rendering. Daniel: pull latest and hard-refresh the UI.",
@@ -22,30 +58,6 @@
       "timestamp": "2026-03-11 · log-4",
       "source": "BOARD.md",
       "summary": "23:38pm: Added data for Boi Gordo cron job and introduced `state` field per cron; requested Jimmy to (1) remove stray header copy and (2) show badges for active/paused jobs.",
-      "status": "done"
-    },
-    {
-      "timestamp": "2026-03-11 11:51 PDT",
-      "source": "Vibeanium",
-      "summary": "Started first-pass Mission Control revamp: removing Firebase and wiring static snapshot data sources.",
-      "status": "in-progress"
-    },
-    {
-      "timestamp": "2026-03-04 13:20 PDT",
-      "source": "Mission Control",
-      "summary": "Upgraded dashboard layout to dark sidebar variant; pending static hosting refresh.",
-      "status": "done"
-    },
-    {
-      "timestamp": "2026-03-04 09:04 PDT",
-      "source": "Mission Control",
-      "summary": "Refined cron state badges and added Boi Gordo cron status rendering.",
-      "status": "done"
-    },
-    {
-      "timestamp": "2026-03-03 23:38 PDT",
-      "source": "Automation",
-      "summary": "Added Boi Gordo cron job and standardized active/paused cron states.",
       "status": "done"
     }
   ]

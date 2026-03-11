@@ -2,26 +2,26 @@
   "automations": [
     {
       "name": "Boi Gordo - São Luís de Montes Belos",
-      "schedule": "0 13 * * *",
+      "schedule": "0 13 * * * (America/Vancouver)",
       "state": "active",
-      "lastRun": "Unknown",
-      "nextRun": "Unknown",
-      "summary": "This job runs daily at 13h Vancouver to deliver the WhatsApp-style newsletter you approved. Build the text exactly as: 1) title line starting with a *cow emoji* and location (São Luís de Montes Belos, GO); 2) price section listing arroba (15 kg) and price per kilo (no math explanation). Use the latest CEPEA/ESALQ Boi Gordo indicator (https://cepea.org.br/br/indicador/boi-gordo.aspx) as the primary source. If necessary, supplement with a Goiás price table (Notícias Agrícolas / https://www.noticiasagricolas.com.br/cotacoes/boi-gordo). 3) The second block labeled “Sinal de mercado” should explain, in plain language, why the level is holding (supply/demand signal, e.g., tight oferta in Goiás or frigoríficos seeking lotes), no percentages. 4) The third block titled “Ponto quente do dia” should mention the single most relevant news item (cepea says China demand/em exports, or other solid report). Keep tone simple, emoji-friendly, and ready to copy-paste into WhatsApp. Conclude with the signature: *Informou Tatersal Digital*. Do not include extra sections or data beyond this template. Be explicit about sources when referencing them."
+      "lastRun": "2026-03-10 15:51 PDT",
+      "nextRun": "2026-03-11 13:00 PDT",
+      "summary": "Daily São Luís de Montes Belos price update"
     },
     {
       "name": "🦞 Daily Claw",
-      "schedule": "0 8 * * *",
+      "schedule": "0 8 * * * (America/Vancouver)",
       "state": "active",
-      "lastRun": "Unknown",
-      "nextRun": "Unknown",
+      "lastRun": "2026-03-11 08:00 PDT",
+      "nextRun": "2026-03-12 08:00 PDT",
       "summary": "Daily Claw (diário, curto e útil): entregue exatamente 1 item por dia, alternando entre A/B/C. FORMATO OBRIGATÓRIO em 4 linhas: 1) Título: <até 60 caracteres>; 2) O que é: <até 120 caracteres>; 3) Por que importa: <até 90 caracteres>; 4) Próximo passo: <até 90 caracteres>. Limite total: 450 caracteres. Sem markdown, sem listas extras, sem notas, sem links longos, sem texto fora das 4 linhas. Se busca externa indisponível, declarar em até 40 caracteres dentro da linha 2 e usar A ou B."
     },
     {
       "name": "🧠 MyClaw Auto-Improvement Report",
-      "schedule": "15 9 * * *",
+      "schedule": "15 9 * * * (America/Vancouver)",
       "state": "active",
-      "lastRun": "Unknown",
-      "nextRun": "Unknown",
+      "lastRun": "2026-03-11 09:15 PDT",
+      "nextRun": "2026-03-12 09:15 PDT",
       "summary": "Generate a DAILY Telegram report based on the latest MyClaw newsletter email (from MyClaw@aisecret.us, last 48h). Select ONLY the single best improvement that has highest leverage and that you can execute by yourself after explicit user approval on Telegram. Output EXACTLY these fields in Portuguese, concise:\n1) O que é\n2) Resumo (1 linha)\n3) Pra que é\n4) O que vai melhorar\n5) Pode executar? (SIM/NÃO + 1 linha)\nRules: pick only one action; prioritize actions that are internal and executable without external dependencies; avoid unsafe/self-preservation framing; if no new MyClaw issue in 48h, still output one best executable improvement based on current system state."
     }
   ]
