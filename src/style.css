@@ -123,7 +123,7 @@ button:hover {
   gap: 1rem;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 1.35rem 1.4rem;
+  padding: 0.35rem 0.15rem 0.15rem;
   overflow: hidden;
   position: relative;
 }
@@ -131,16 +131,16 @@ button:hover {
 .topbar::after {
   content: '';
   position: absolute;
-  inset: auto -10% -45% auto;
-  width: 380px;
-  height: 220px;
+  inset: -18% -10% auto auto;
+  width: 420px;
+  height: 260px;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(120, 255, 189, 0.12), transparent 68%);
+  background: radial-gradient(circle, rgba(120, 255, 189, 0.14), transparent 68%);
 }
 
 .topbar-copy {
   display: grid;
-  gap: 0.45rem;
+  gap: 0.72rem;
 }
 
 .title-mark,
@@ -154,11 +154,11 @@ button:hover {
 }
 
 .hero-title {
-  font-size: clamp(1.5rem, 4vw, 2.4rem);
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  font-weight: 760;
-  max-width: 12ch;
+  font-size: clamp(2.6rem, 9vw, 4.6rem);
+  line-height: 0.94;
+  letter-spacing: -0.065em;
+  font-weight: 790;
+  max-width: 7.6ch;
 }
 
 .topbar-meta,
@@ -166,6 +166,10 @@ button:hover {
   color: var(--muted);
   font-size: 0.96rem;
   line-height: 1.65;
+}
+
+.topbar-meta {
+  font-size: 1.02rem;
 }
 
 h2 {

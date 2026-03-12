@@ -120,13 +120,12 @@ onMounted(loadData)
   <main class="app-shell">
     <div class="ambient-layer" aria-hidden="true"></div>
 
-    <header class="topbar shell-card">
+    <header class="topbar">
       <div class="topbar-copy">
-        <p class="title-mark">Wakanda Mission Control</p>
-        <h1 class="hero-title">Glow Green Ops Grid</h1>
+        <h1 class="hero-title">Wakanda Mission Control</h1>
         <p class="muted topbar-meta">{{ formatRelativeTimestamp(overview.generatedAt) }} · {{ overview.missionStatus }}</p>
+        <button class="ghost" @click="loadData">Refresh</button>
       </div>
-      <button class="ghost" @click="loadData">Refresh</button>
     </header>
 
     <nav class="tabs" aria-label="Mission control modules">
@@ -145,16 +144,6 @@ onMounted(loadData)
     <p v-if="loading" class="shell-card muted">Loading operational snapshot…</p>
 
     <section v-if="!loading && activeTab === 'Overview'" class="module-stack">
-      <article class="summary-band shell-card">
-        <p class="eyebrow">System posture</p>
-        <p class="hero-copy">{{ overview.summary }}</p>
-        <div class="hero-meta">
-          <span class="badge neutral">{{ agents.length }} agents</span>
-          <span class="badge neutral">{{ automations.length }} automations</span>
-          <span class="badge neutral">{{ repos.github.length }} repos</span>
-        </div>
-      </article>
-
       <div class="kpi-grid">
         <article v-for="kpi in overview.kpis" :key="kpi.label" class="kpi-card shell-card">
           <p class="label">{{ kpi.label }}</p>
