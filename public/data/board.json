@@ -1,8 +1,10 @@
 {
-  "lastUpdated": "2026-03-04",
+  "lastUpdated": "2026-03-12",
   "columns": {
     "todo": [
-      "Define the next project to replace the archived Grocery effort",
+      "Estagiário 👦 — local Ollama coprocessor pilot (queued; wait for Daniel's explicit OK)",
+      "Estagiário 👦 — first model selected: Qwen2.5:7b-instruct",
+      "Tatersal Digital — support trip prospecting with Goiás auction intelligence enrichment",
       "Finalize Wakanda Mission Control polish + operating workflow",
       "Decide the first high-leverage dashboard module after Mission Control"
     ],
