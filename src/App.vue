@@ -120,10 +120,11 @@ onMounted(loadData)
   <main class="app-shell">
     <div class="ambient-layer" aria-hidden="true"></div>
 
-    <header class="topbar">
-      <div>
-        <p class="title-mark">Mission Control</p>
-        <p class="muted">{{ formatRelativeTimestamp(overview.generatedAt) }} · {{ overview.missionStatus }}</p>
+    <header class="topbar shell-card">
+      <div class="topbar-copy">
+        <p class="title-mark">Wakanda Mission Control</p>
+        <h1 class="hero-title">Glow Green Ops Grid</h1>
+        <p class="muted topbar-meta">{{ formatRelativeTimestamp(overview.generatedAt) }} · {{ overview.missionStatus }}</p>
       </div>
       <button class="ghost" @click="loadData">Refresh</button>
     </header>
@@ -145,6 +146,7 @@ onMounted(loadData)
 
     <section v-if="!loading && activeTab === 'Overview'" class="module-stack">
       <article class="summary-band shell-card">
+        <p class="eyebrow">System posture</p>
         <p class="hero-copy">{{ overview.summary }}</p>
         <div class="hero-meta">
           <span class="badge neutral">{{ agents.length }} agents</span>
