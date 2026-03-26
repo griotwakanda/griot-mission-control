@@ -15,7 +15,7 @@
       "Telegram bot connected + allowlist",
       "Daily 7am Telegram morning brief cron job created (with emojis) + verified delivery via message tool",
       "Heartbeat email triage rules (hourly checks)",
-      "Disabled Tatersal Boiadeiro Alignment & AI Finance Analyst Midday cron jobs per Daniel’s request",
+      "Disabled old Tatersal alignment and AI Finance Analyst midday cron jobs per Daniel’s request",
       "Created 13h Boi Gordo (São Luís de Montes Belos, GO) cron job with WhatsApp-format newsletter template",
       "Implemented `scripts/memory-rollup.js` + `scripts/memory-rehydrate.js` for nightly archive + morning context summary; scheduled them via LaunchAgents (02:05 and 07:10 local) after host `crontab` proved unavailable"
     ],

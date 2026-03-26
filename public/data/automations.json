@@ -4,25 +4,9 @@
       "name": "Mission Control Update",
       "schedule": "*/15 * * * * (America/Vancouver)",
       "state": "active",
-      "lastRun": "2026-03-26 10:45 PDT",
-      "nextRun": "2026-03-26 11:00 PDT",
+      "lastRun": "2026-03-26 13:15 PDT",
+      "nextRun": "2026-03-26 13:30 PDT",
       "summary": "Updates the Mission Control dashboard from latest agent outputs"
-    },
-    {
-      "name": "🐂 Informativo Boi Gordo",
-      "schedule": "0 13 * * * (America/Vancouver)",
-      "state": "active",
-      "lastRun": "2026-03-25 13:00 PDT",
-      "nextRun": "2026-03-26 13:00 PDT",
-      "summary": "Daily Boi Gordo market update"
-    },
-    {
-      "name": "Mission Control daily deploy",
-      "schedule": "10 13 * * * (America/Vancouver)",
-      "state": "active",
-      "lastRun": "Unknown",
-      "nextRun": "2026-03-26 13:10 PDT",
-      "summary": "Run /Users/griotbot/.openclaw/workspace/mission-control/scripts/deploy-daily.sh. If it succeeds, reply with a concise one-line summary of the deployment result and live URL. If it fails, report the failure briefly with the key error."
     },
     {
       "name": "🦞 Daily Claw",
@@ -47,6 +31,22 @@
       "lastRun": "2026-03-26 10:00 PDT",
       "nextRun": "2026-03-27 10:00 PDT",
       "summary": "Run this task using the tatersal-proactive-builder skill. Follow the skill instructions exactly."
+    },
+    {
+      "name": "🐂 Informativo Boi Gordo",
+      "schedule": "0 13 * * * (America/Vancouver)",
+      "state": "active",
+      "lastRun": "2026-03-26 13:00 PDT",
+      "nextRun": "2026-03-27 13:00 PDT",
+      "summary": "Daily Boi Gordo market update"
+    },
+    {
+      "name": "Mission Control daily deploy",
+      "schedule": "10 13 * * * (America/Vancouver)",
+      "state": "active",
+      "lastRun": "2026-03-26 13:10 PDT",
+      "nextRun": "2026-03-27 13:10 PDT",
+      "summary": "Run /Users/griotbot/.openclaw/workspace/mission-control/scripts/deploy-daily.sh. If it succeeds, reply with a concise one-line summary of the deployment result and live URL. If it fails, report the failure briefly with the key error."
     }
   ]
 }

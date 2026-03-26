@@ -286,6 +286,22 @@ function getBriefings() {
   ].filter(Boolean)
 }
 
+function parseDailyMemoryLog(markdown) {
+  const lines = markdown.split(/\r?\n/)
+  const entries = []
+  for (const raw of lines) {
+    const line = raw.trim()
+    if (!line.startsWith('- ')) continue
+    entries.push({
+      timestamp: toDateOnly(),
+      source: 'memory',
+      summary: line.slice(2).trim(),
+      status: 'done',
+    })
+  }
+  return entries
+}
+
 function getWorklog(boardDailyLog) {
   const derivedBoard = boardDailyLog.slice(0, 6).map((item, index) => ({
     timestamp: `${toDateOnly()} · log-${index + 1}`,
@@ -295,14 +311,18 @@ function getWorklog(boardDailyLog) {
   }))
 
   const commitEntries = getMissionControlCommits(6)
+  const todayMemoryPath = path.join(workspaceRoot, 'memory', `${toDateOnly()}.md`)
+  const memoryEntries = fs.existsSync(todayMemoryPath)
+    ? parseDailyMemoryLog(fs.readFileSync(todayMemoryPath, 'utf8')).slice(-8).reverse()
+    : []
 
   const seen = new Set()
-  return [...commitEntries, ...derivedBoard].filter((entry) => {
+  return [...memoryEntries, ...commitEntries, ...derivedBoard].filter((entry) => {
     const key = `${entry.timestamp}|${entry.summary}`
     if (seen.has(key)) return false
     seen.add(key)
     return true
-  }).slice(0, 12)
+  }).slice(0, 16)
 }
 
 function buildOverview({ agents, automations, localRepos, board, briefings }) {

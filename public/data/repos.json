@@ -6,7 +6,7 @@
       "fullName": "griotwakanda/griot-mission-control",
       "private": false,
       "url": "https://github.com/griotwakanda/griot-mission-control",
-      "updatedAt": "2026-03-26T17:52:00Z"
+      "updatedAt": "2026-03-26T17:57:53Z"
     },
     {
       "name": "firetv-mood-wall",
@@ -40,7 +40,7 @@
       "branch": "fresh-start",
       "clean": false,
       "health": "dirty",
-      "lastCommit": "tune founder-style proactive behavior",
+      "lastCommit": "remove boiadeiro wording from board",
       "origin": "git@github.com:griotwakanda/test-repo.git"
     },
     {
@@ -49,7 +49,7 @@
       "branch": "main",
       "clean": false,
       "health": "dirty",
-      "lastCommit": "add daily mission control deploy workflow",
+      "lastCommit": "refocus mission control on daily briefings",
       "origin": "git@github.com:griotwakanda/griot-mission-control.git"
     },
     {

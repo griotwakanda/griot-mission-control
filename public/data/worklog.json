@@ -1,6 +1,42 @@
 {
   "entries": [
     {
+      "timestamp": "2026-03-26",
+      "source": "memory",
+      "summary": "Daniel wants visible references to the old “Boiadeiro” naming removed from current GUI/dashboard surfaces; current board wording was updated and Mission Control redeployed, but old session/history artifacts under ~/.openclaw may still contain the name.",
+      "status": "done"
+    },
+    {
+      "timestamp": "2026-03-26",
+      "source": "memory",
+      "summary": "Daniel requested cleanup of abandoned design-oriented skills. Removed design-taste-frontend, high-end-visual-design, industrial-brutalist-ui, minimalist-ui, stitch-design-taste, full-output-enforcement, and frontend-design/superdesign from local skill directories.",
+      "status": "done"
+    },
+    {
+      "timestamp": "2026-03-26",
+      "source": "memory",
+      "summary": "Daniel asked to remove abandoned or credential-blocked skill clutter. Installed vercel, personal-finance, use-browser; removed x-api and browser-automation because Daniel does not have X API credentials or ANTHROPIC_API_KEY.",
+      "status": "done"
+    },
+    {
+      "timestamp": "2026-03-26",
+      "source": "memory",
+      "summary": "Mission Control dashboard was stale on Vercel; refreshed, refocused around latest briefings/automation pulse, redeployed, and set up a daily deploy cron at 13:10 America/Vancouver.",
+      "status": "done"
+    },
+    {
+      "timestamp": "2026-03-26",
+      "source": "memory",
+      "summary": "Daniel explicitly reinforced a strong preference for zero interim progress messages while tasks are in flight. Default behavior should be silent work and only reply when done, unless a real blocker requires intervention.",
+      "status": "done"
+    },
+    {
+      "timestamp": "2026-03-26 10:57 PDT",
+      "source": "mission-control git",
+      "summary": "refocus mission control on daily briefings",
+      "status": "done"
+    },
+    {
       "timestamp": "2026-03-26 10:51 PDT",
       "source": "mission-control git",
       "summary": "add daily mission control deploy workflow",
@@ -28,12 +64,6 @@
       "timestamp": "2026-03-12 08:55 PDT",
       "source": "mission-control git",
       "summary": "Queue Estagiario project in Mission Control",
-      "status": "done"
-    },
-    {
-      "timestamp": "2026-03-11 13:16 PDT",
-      "source": "mission-control git",
-      "summary": "refine ui density and soften overview framing",
       "status": "done"
     },
     {
