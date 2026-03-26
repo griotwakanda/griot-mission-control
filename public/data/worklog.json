@@ -1,61 +1,61 @@
 {
   "entries": [
     {
-      "timestamp": "2026-03-11 12:52 PDT",
+      "timestamp": "2026-03-12 10:50 PDT",
       "source": "mission-control git",
-      "summary": "Redesign Mission Control with premium fintech afrofuturist UI shell",
+      "summary": "Keep Mission Control title on one line",
       "status": "done"
     },
     {
-      "timestamp": "2026-03-11 12:17 PDT",
+      "timestamp": "2026-03-12 10:24 PDT",
       "source": "mission-control git",
-      "summary": "Derive Mission Control agents and automations from live state",
+      "summary": "Align Mission Control hero with reference",
       "status": "done"
     },
     {
-      "timestamp": "2026-03-11 12:14 PDT",
+      "timestamp": "2026-03-12 09:16 PDT",
       "source": "mission-control git",
-      "summary": "Add Mission Control snapshot refresh pipeline",
+      "summary": "Revamp Mission Control with glow green theme",
       "status": "done"
     },
     {
-      "timestamp": "2026-03-11 11:54 PDT",
+      "timestamp": "2026-03-12 08:55 PDT",
       "source": "mission-control git",
-      "summary": "Revamp Mission Control to static snapshot dashboard",
+      "summary": "Queue Estagiario project in Mission Control",
       "status": "done"
     },
     {
-      "timestamp": "2026-03-05 21:32 PST",
+      "timestamp": "2026-03-11 13:16 PDT",
       "source": "mission-control git",
-      "summary": "feat: migrate mission control to Vue + Firebase session log",
+      "summary": "refine ui density and soften overview framing",
       "status": "done"
     },
     {
-      "timestamp": "2026-03-05 13:40 PST",
+      "timestamp": "2026-03-11 13:12 PDT",
       "source": "mission-control git",
-      "summary": "feat: add session log tracking",
+      "summary": "Remove grocery project from Mission Control state",
       "status": "done"
     },
     {
-      "timestamp": "2026-03-11 · log-1",
+      "timestamp": "2026-03-26 · log-1",
       "source": "BOARD.md",
       "summary": "09:04am: Wakanda Mission Control refreshed — removed stray hero eyebrow, added cron state badges (active/paused styling + default Active), and wired Boi Gordo cron tag/state rendering. Daniel: pull latest and hard-refresh the UI.",
       "status": "done"
     },
     {
-      "timestamp": "2026-03-11 · log-2",
+      "timestamp": "2026-03-26 · log-2",
       "source": "BOARD.md",
       "summary": "1:20pm: Mission Control upgrade pushed (dark sidebar layout, same sections). Need GitHub Pages refresh; page still showing old UI.",
       "status": "done"
     },
     {
-      "timestamp": "2026-03-11 · log-3",
+      "timestamp": "2026-03-26 · log-3",
       "source": "BOARD.md",
       "summary": "End-of-day: Memory automation scripts added + LaunchAgents registered; “Mood” rule stored in memory/mood-rule.md for Fire TV updates.",
       "status": "done"
     },
     {
-      "timestamp": "2026-03-11 · log-4",
+      "timestamp": "2026-03-26 · log-4",
       "source": "BOARD.md",
       "summary": "23:38pm: Added data for Boi Gordo cron job and introduced `state` field per cron; requested Jimmy to (1) remove stray header copy and (2) show badges for active/paused jobs.",
       "status": "done"

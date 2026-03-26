@@ -1,28 +1,44 @@
 {
   "automations": [
     {
-      "name": "Boi Gordo - São Luís de Montes Belos",
+      "name": "Mission Control Update",
+      "schedule": "*/15 * * * * (America/Vancouver)",
+      "state": "active",
+      "lastRun": "2026-03-26 10:45 PDT",
+      "nextRun": "2026-03-26 11:00 PDT",
+      "summary": "Updates the Mission Control dashboard from latest agent outputs"
+    },
+    {
+      "name": "🐂 Informativo Boi Gordo",
       "schedule": "0 13 * * * (America/Vancouver)",
       "state": "active",
-      "lastRun": "2026-03-10 15:51 PDT",
-      "nextRun": "2026-03-11 13:00 PDT",
-      "summary": "Daily São Luís de Montes Belos price update"
+      "lastRun": "2026-03-25 13:00 PDT",
+      "nextRun": "2026-03-26 13:00 PDT",
+      "summary": "Daily Boi Gordo market update"
     },
     {
       "name": "🦞 Daily Claw",
       "schedule": "0 8 * * * (America/Vancouver)",
       "state": "active",
-      "lastRun": "2026-03-11 08:00 PDT",
-      "nextRun": "2026-03-12 08:00 PDT",
-      "summary": "Daily Claw (diário, curto e útil): entregue exatamente 1 item por dia, alternando entre A/B/C. FORMATO OBRIGATÓRIO em 4 linhas: 1) Título: <até 60 caracteres>; 2) O que é: <até 120 caracteres>; 3) Por que importa: <até 90 caracteres>; 4) Próximo passo: <até 90 caracteres>. Limite total: 450 caracteres. Sem markdown, sem listas extras, sem notas, sem links longos, sem texto fora das 4 linhas. Se busca externa indisponível, declarar em até 40 caracteres dentro da linha 2 e usar A ou B."
+      "lastRun": "2026-03-26 08:00 PDT",
+      "nextRun": "2026-03-27 08:00 PDT",
+      "summary": "Run this task using the daily-claw skill. Follow the skill instructions exactly."
     },
     {
       "name": "🧠 MyClaw Auto-Improvement Report",
       "schedule": "15 9 * * * (America/Vancouver)",
       "state": "active",
-      "lastRun": "2026-03-11 09:15 PDT",
-      "nextRun": "2026-03-12 09:15 PDT",
-      "summary": "Generate a DAILY Telegram report based on the latest MyClaw newsletter email (from MyClaw@aisecret.us, last 48h). Select ONLY the single best improvement that has highest leverage and that you can execute by yourself after explicit user approval on Telegram. Output EXACTLY these fields in Portuguese, concise:\n1) O que é\n2) Resumo (1 linha)\n3) Pra que é\n4) O que vai melhorar\n5) Pode executar? (SIM/NÃO + 1 linha)\nRules: pick only one action; prioritize actions that are internal and executable without external dependencies; avoid unsafe/self-preservation framing; if no new MyClaw issue in 48h, still output one best executable improvement based on current system state."
+      "lastRun": "2026-03-26 09:15 PDT",
+      "nextRun": "2026-03-27 09:15 PDT",
+      "summary": "Run this task using the myclaw-auto-improvement skill. Follow the skill instructions exactly."
+    },
+    {
+      "name": "🧾 Tatersal Proactive Builder",
+      "schedule": "0 10 * * 1-5 (America/Vancouver)",
+      "state": "active",
+      "lastRun": "2026-03-26 10:00 PDT",
+      "nextRun": "2026-03-27 10:00 PDT",
+      "summary": "Run this task using the tatersal-proactive-builder skill. Follow the skill instructions exactly."
     }
   ]
 }
