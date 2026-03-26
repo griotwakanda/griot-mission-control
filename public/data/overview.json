@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-26 10:51 PDT",
+  "generatedAt": "2026-03-26 10:57 PDT",
   "missionStatus": "Green Zone",
   "kpis": [
     {
@@ -9,7 +9,7 @@
     },
     {
       "label": "Enabled Automations",
-      "value": 5,
+      "value": 6,
       "status": "healthy"
     },
     {
@@ -33,9 +33,10 @@
       "status": "ok"
     }
   ],
-  "summary": "Mission Control is now driven by local snapshots generated from the real workspace state instead of hand-seeded placeholders.",
+  "summary": "Daily briefings, automations, and workspace state in one operator dashboard. Built from local snapshots, not hand-maintained status theatre.",
   "currentFocus": [
-    "Keep Mission Control data trustworthy",
+    "Daily Claw: 🦞 Daily Claw",
+    "MyClaw: 1) O que é",
     "Wakanda Mission Control redesign, deployment, and data cleanup",
     "Define the next project to replace the archived Grocery effort"
   ],

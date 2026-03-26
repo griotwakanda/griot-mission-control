@@ -1,6 +1,12 @@
 {
   "entries": [
     {
+      "timestamp": "2026-03-26 10:51 PDT",
+      "source": "mission-control git",
+      "summary": "add daily mission control deploy workflow",
+      "status": "done"
+    },
+    {
       "timestamp": "2026-03-12 10:50 PDT",
       "source": "mission-control git",
       "summary": "Keep Mission Control title on one line",
@@ -28,12 +34,6 @@
       "timestamp": "2026-03-11 13:16 PDT",
       "source": "mission-control git",
       "summary": "refine ui density and soften overview framing",
-      "status": "done"
-    },
-    {
-      "timestamp": "2026-03-11 13:12 PDT",
-      "source": "mission-control git",
-      "summary": "Remove grocery project from Mission Control state",
       "status": "done"
     },
     {

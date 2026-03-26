@@ -1,0 +1,36 @@
+{
+  "briefings": [
+    {
+      "label": "Daily Claw",
+      "title": "🦞 Daily Claw",
+      "excerpt": "Produto: OpenClaw 2026.3.24 melhorou compatibilidade OpenAI e deixou a visibilidade de ferramentas muito mais clara. O que saiu / aconteceu A release de ~22h atrás adiciona /v1/models e /v1/embeddings, além de repassar overrides explícitos em /v1/chat/completions e /v1/responses. Na prática, isso amplia compatibilidade",
+      "updatedAt": "2026-03-26 08:00 PDT",
+      "theme": "intel",
+      "sourcePath": "docs/mission-control/daily-claw-latest.md"
+    },
+    {
+      "label": "MyClaw",
+      "title": "1) O que é",
+      "excerpt": "Transformar o Skill Security Gate em um fluxo executável de auditoria de skills instaladas. 2) Resumo Criar um inventário das skills atuais e um processo padrão de classificação ALLOW / TRIAL / BLOCK antes de qualquer uso recorrente. 3) Pra que é Reduzir risco de skill insegura ou excessivamente permissiva, seguindo o ",
+      "updatedAt": "2026-03-26 09:16 PDT",
+      "theme": "improve",
+      "sourcePath": "docs/mission-control/myclaw-auto-improvement-latest.md"
+    },
+    {
+      "label": "Tatersal",
+      "title": "Tatersal Proactive Builder — Latest Output",
+      "excerpt": "Date: 2026-03-26 (Thu) Task: Add one high-value artifact to docs/tatersal-digital/ What was created - File: docs/tatersal-digital/operations/treinamento-expresso-operadores-leilao-whatsapp.md - Type: Fast operator training script/checklist for pilot auction teams Why this matters now - Existing docs covered onboarding,",
+      "updatedAt": "2026-03-26 10:01 PDT",
+      "theme": "build",
+      "sourcePath": "docs/mission-control/tatersal-proactive-builder-latest.md"
+    },
+    {
+      "label": "Boi Gordo",
+      "title": "🐂 Informativo Boi Gordo",
+      "excerpt": "💰 Preço CEPEA/ESALQ: R$ 351,40/@ no fechamento de 24/03, alta de 0,20% sobre o dado anterior ⬆️ Goiânia: R$ 326,50/@ à vista e R$ 330,00/@ a prazo (Scot, fechamento de 24/03) 📊 Mercado A arroba segue com sustentação porque a oferta de boi pronto continua curta e as escalas de abate seguem enxutas em várias praças. Do",
+      "updatedAt": "2026-03-25 13:00 PDT",
+      "theme": "market",
+      "sourcePath": "docs/mission-control/boi-gordo-latest.md"
+    }
+  ]
+}

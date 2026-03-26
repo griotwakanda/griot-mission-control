@@ -17,6 +17,14 @@
       "summary": "Daily Boi Gordo market update"
     },
     {
+      "name": "Mission Control daily deploy",
+      "schedule": "10 13 * * * (America/Vancouver)",
+      "state": "active",
+      "lastRun": "Unknown",
+      "nextRun": "2026-03-26 13:10 PDT",
+      "summary": "Run /Users/griotbot/.openclaw/workspace/mission-control/scripts/deploy-daily.sh. If it succeeds, reply with a concise one-line summary of the deployment result and live URL. If it fails, report the failure briefly with the key error."
+    },
+    {
       "name": "🦞 Daily Claw",
       "schedule": "0 8 * * * (America/Vancouver)",
       "state": "active",

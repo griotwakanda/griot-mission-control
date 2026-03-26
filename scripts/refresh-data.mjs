@@ -9,6 +9,7 @@ const __dirname = path.dirname(__filename)
 const projectRoot = path.resolve(__dirname, '..')
 const workspaceRoot = path.resolve(projectRoot, '..')
 const dataDir = path.join(projectRoot, 'public', 'data')
+const docsMissionControlDir = path.join(workspaceRoot, 'docs', 'mission-control')
 
 function ensureDir(dir) {
   fs.mkdirSync(dir, { recursive: true })
@@ -103,7 +104,11 @@ function parseBoardMarkdown(markdown) {
 
 function shouldHideRepo(repo) {
   const haystack = JSON.stringify(repo).toLowerCase()
-  return haystack.includes('grocery')
+  const repoPath = String(repo.path || '').toLowerCase()
+  return (
+    haystack.includes('grocery') ||
+    repoPath.includes('/archive/legacy/')
+  )
 }
 
 function getGithubRepos() {
@@ -247,6 +252,40 @@ function getMissionControlCommits(limit = 6) {
   })
 }
 
+function readLatestBriefing(fileName, label, theme) {
+  const fullPath = path.join(docsMissionControlDir, fileName)
+  if (!fs.existsSync(fullPath)) return null
+  const raw = fs.readFileSync(fullPath, 'utf8').trim()
+  const stat = fs.statSync(fullPath)
+  const plain = raw
+    .replace(/^#+\s+/gm, '')
+    .replace(/\*+/g, '')
+    .replace(/`+/g, '')
+    .replace(/\[(.*?)\]\((.*?)\)/g, '$1')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+  const lines = plain.split(/\r?\n/).map((line) => line.trim()).filter(Boolean)
+  const title = lines[0] || label
+  const excerpt = lines.slice(1).join(' ').slice(0, 320)
+  return {
+    label,
+    title,
+    excerpt,
+    updatedAt: formatTimestamp(stat.mtime.toISOString()),
+    theme,
+    sourcePath: path.relative(workspaceRoot, fullPath),
+  }
+}
+
+function getBriefings() {
+  return [
+    readLatestBriefing('daily-claw-latest.md', 'Daily Claw', 'intel'),
+    readLatestBriefing('myclaw-auto-improvement-latest.md', 'MyClaw', 'improve'),
+    readLatestBriefing('tatersal-proactive-builder-latest.md', 'Tatersal', 'build'),
+    readLatestBriefing('boi-gordo-latest.md', 'Boi Gordo', 'market'),
+  ].filter(Boolean)
+}
+
 function getWorklog(boardDailyLog) {
   const derivedBoard = boardDailyLog.slice(0, 6).map((item, index) => ({
     timestamp: `${toDateOnly()} · log-${index + 1}`,
@@ -266,12 +305,13 @@ function getWorklog(boardDailyLog) {
   }).slice(0, 12)
 }
 
-function buildOverview({ agents, automations, localRepos, board }) {
+function buildOverview({ agents, automations, localRepos, board, briefings }) {
   const dirtyRepos = localRepos.filter((r) => !r.clean).length
   const openTasks = board.columns.todo.length + board.columns.inProgress.length + board.columns.blocked.length
   const blockers = board.columns.blocked.length
   const completed = board.columns.done.length
   const enabledAutomations = automations.filter((a) => a.state !== 'paused').length
+  const freshBriefings = briefings.slice(0, 2).map((item) => `${item.label}: ${item.title}`)
 
   return {
     generatedAt: toPdtStamp(),
@@ -284,9 +324,9 @@ function buildOverview({ agents, automations, localRepos, board }) {
       { label: 'Dirty Repos', value: dirtyRepos, status: dirtyRepos ? 'warning' : 'clean' },
       { label: 'Blockers', value: blockers, status: blockers ? 'blocked' : 'ok' },
     ],
-    summary: 'Mission Control is now driven by local snapshots generated from the real workspace state instead of hand-seeded placeholders.',
+    summary: 'Daily briefings, automations, and workspace state in one operator dashboard. Built from local snapshots, not hand-maintained status theatre.',
     currentFocus: [
-      'Keep Mission Control data trustworthy',
+      ...freshBriefings,
       ...board.columns.inProgress.slice(0, 2),
       ...board.columns.todo.slice(0, 1),
     ].slice(0, 4),
@@ -307,14 +347,16 @@ const agents = getAgents()
 const automations = getAutomations()
 const githubRepos = getGithubRepos()
 const localRepos = getLocalRepos()
+const briefings = getBriefings()
 const worklogEntries = getWorklog(board.dailyLog)
-const overview = buildOverview({ agents, automations, localRepos, board })
+const overview = buildOverview({ agents, automations, localRepos, board, briefings })
 
 writeJson('board.json', { lastUpdated: board.lastUpdated, columns: board.columns })
 writeJson('agents.json', { agents })
 writeJson('automations.json', { automations })
 writeJson('repos.json', { github: githubRepos, local: localRepos })
 writeJson('worklog.json', { entries: worklogEntries })
+writeJson('briefings.json', { briefings })
 writeJson('overview.json', overview)
 
 console.log(`Mission Control snapshots refreshed at ${overview.generatedAt}`)

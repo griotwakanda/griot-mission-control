@@ -1,20 +1,20 @@
 {
   "github": [
     {
+      "name": "griot-mission-control",
+      "owner": "griotwakanda",
+      "fullName": "griotwakanda/griot-mission-control",
+      "private": false,
+      "url": "https://github.com/griotwakanda/griot-mission-control",
+      "updatedAt": "2026-03-26T17:52:00Z"
+    },
+    {
       "name": "firetv-mood-wall",
       "owner": "griotwakanda",
       "fullName": "griotwakanda/firetv-mood-wall",
       "private": false,
       "url": "https://github.com/griotwakanda/firetv-mood-wall",
       "updatedAt": "2026-03-25T23:32:53Z"
-    },
-    {
-      "name": "griot-mission-control",
-      "owner": "griotwakanda",
-      "fullName": "griotwakanda/griot-mission-control",
-      "private": false,
-      "url": "https://github.com/griotwakanda/griot-mission-control",
-      "updatedAt": "2026-03-12T17:50:57Z"
     },
     {
       "name": "wakanda-kanban",
@@ -49,7 +49,7 @@
       "branch": "main",
       "clean": false,
       "health": "dirty",
-      "lastCommit": "Keep Mission Control title on one line",
+      "lastCommit": "add daily mission control deploy workflow",
       "origin": "git@github.com:griotwakanda/griot-mission-control.git"
     },
     {

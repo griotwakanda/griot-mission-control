@@ -3,10 +3,10 @@
     {
       "name": "Griot",
       "role": "Main strategic operator",
-      "model": "gpt-5.4",
+      "model": "gpt-5.4-mini",
       "status": "online",
-      "lastActive": "2026-03-26 10:48 PDT",
-      "taskSummary": "124 sessions tracked. Most recent context usage: 15%."
+      "lastActive": "2026-03-26 10:53 PDT",
+      "taskSummary": "124 sessions tracked. Most recent context usage: 23%."
     },
     {
       "name": "Vibeanium",
